@@ -2,6 +2,8 @@ import { IoLogoElectron } from "react-icons/io5";
 import ThemeController from "../../../../../components/ThemeController /ThemeController";
 
 const Navbar = () => {
+     
+
   return (
     <div className="navbar glass w-full sticky z-50 top-0 shadow-lg border-b mb-2 ">
       <div className="flex-1 gap-0 font-extrabold text-red-600">

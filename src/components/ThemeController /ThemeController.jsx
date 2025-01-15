@@ -1,4 +1,22 @@
+import { useEffect, useState } from "react";
+
 const ThemeController = () => {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html").setAttribute("data-theme", localTheme);
+  }, [theme]);
+
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme("luxury");
+    } else {
+      setTheme("light");
+    }
+  };
+
   return (
     <div>
       <label className="flex cursor-pointer gap-2">
@@ -17,8 +35,8 @@ const ThemeController = () => {
           <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
         </svg>
         <input
+          onChange={handleToggle}
           type="checkbox"
-          value="synthwave"
           className="toggle theme-controller"
         />
         <svg
