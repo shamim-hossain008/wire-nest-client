@@ -2,8 +2,6 @@ import { IoLogoElectron } from "react-icons/io5";
 import ThemeController from "../../../../../components/ThemeController /ThemeController";
 
 const Navbar = () => {
-     
-
   return (
     <div className="navbar glass w-full sticky z-50 top-0 shadow-lg border-b mb-2 ">
       <div className="flex-1 gap-0 font-extrabold text-red-600">
@@ -54,7 +52,7 @@ const Navbar = () => {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src="https://i.ibb.co/dpy94pL/20240120-151517.jpg"
               />
             </div>
           </div>

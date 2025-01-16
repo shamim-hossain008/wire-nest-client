@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
 const ThemeController = () => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    // Get the theme from localStorage or default to "light"
+    return localStorage.getItem("theme") || "light";
+  });
 
   useEffect(() => {
+    // Get the theme from localStorage or default to "light"
     localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html").setAttribute("data-theme", localTheme);
+    document.querySelector("html").setAttribute("data-theme", theme);
   }, [theme]);
 
   const handleToggle = (e) => {
@@ -37,6 +40,8 @@ const ThemeController = () => {
         <input
           onChange={handleToggle}
           type="checkbox"
+          //added condition
+          checked={theme === "luxury"}
           className="toggle theme-controller"
         />
         <svg
