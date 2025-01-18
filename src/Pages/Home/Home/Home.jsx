@@ -1,7 +1,12 @@
-import React from "react";
+import bgImage from "../../../assets/react.svg";
 
 function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      Home
+      <img src={bgImage} alt="" />
+    </div>
+  );
 }
 
 export default Home;

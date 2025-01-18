@@ -1,13 +1,33 @@
 import { IoLogoElectron } from "react-icons/io5";
+import { Link, NavLink } from "react-router-dom";
 import ThemeController from "../../../../../components/ThemeController /ThemeController";
 
 const Navbar = () => {
+  const navInfo = (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? "text-primary btn-link font-extrabold" : "font-bold"
+        }
+      >
+        Home
+      </NavLink>
+    </>
+  );
   return (
     <div className="navbar glass w-full sticky z-50 top-0 shadow-lg border-b mb-2 ">
-      <div className="flex-1 gap-0 font-extrabold text-red-600">
+      <div className="flex-1 gap-0 font-extrabold text-red-600 ">
         <IoLogoElectron className="text-4xl font-extrabold" />
-        <a className="btn btn-ghost font-extrabold text-xl">Wire-Nest</a>
+        <Link to="/">
+          <h1 className=" gap-0 font-extrabold text-xl">
+            <span className="text-3xl bg-300% font-bold bg-gradient-to-r from-orange-700 via-blue-500 to-green-400 text-transparent bg-clip-text animate-gradient">
+              Wire-Nest
+            </span>
+          </h1>
+        </Link>
       </div>
+      <div>{navInfo}</div>
 
       <div className="flex-none">
         <div className="dropdown dropdown-end">
