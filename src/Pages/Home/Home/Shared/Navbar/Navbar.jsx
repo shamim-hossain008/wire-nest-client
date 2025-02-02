@@ -5,14 +5,42 @@ import ThemeController from "../../../../../components/ThemeController /ThemeCon
 const Navbar = () => {
   const navInfo = (
     <>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          isActive ? "text-primary btn-link font-extrabold" : "font-bold"
-        }
-      >
-        Home
-      </NavLink>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary btn-link font-extrabold transition hover:scale-110"
+              : "font-bold"
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="#"
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary btn-link font-extrabold transition hover:scale-110"
+              : "font-bold"
+          }
+        >
+          Add Product
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="#"
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary btn-link font-extrabold transition hover:scale-110"
+              : "font-bold"
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
   return (
@@ -20,15 +48,16 @@ const Navbar = () => {
       <div className="flex-1 gap-0 font-extrabold text-red-600 ">
         <IoLogoElectron className="text-4xl font-extrabold" />
         <Link to="/">
-          <h1 className=" gap-0 font-extrabold text-xl">
-            <span className="text-3xl bg-300% font-bold bg-gradient-to-r from-orange-700 via-blue-500 to-green-400 text-transparent bg-clip-text animate-gradient">
+          <h1 className=" gap-0 font-extrabold text-sm">
+            <span className=" lg:text-3xl bg-300% font-bold bg-gradient-to-r from-orange-700 via-blue-500 to-green-400 text-transparent bg-clip-text animate-gradient">
               Wire-Nest
             </span>
           </h1>
         </Link>
       </div>
-      <div>{navInfo}</div>
-
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">{navInfo}</ul>
+      </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -63,7 +92,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end ">
           <div
             tabIndex={0}
             role="button"
@@ -80,6 +109,7 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
+            <div className=" dropdown lg:hidden">{navInfo}</div>
             <li>
               <a className="justify-between">
                 Profile
