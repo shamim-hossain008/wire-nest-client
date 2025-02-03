@@ -120,7 +120,9 @@ const Navbar = () => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <Link to="/login" className="btn btn-primary">
+                Logout
+              </Link>
             </li>
           </ul>
         </div>
