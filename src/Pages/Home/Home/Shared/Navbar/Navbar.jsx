@@ -19,7 +19,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="#"
+          to="/addProduct"
           className={({ isActive }) =>
             isActive
               ? "text-primary btn-link font-extrabold transition hover:scale-110"
