@@ -1,9 +1,15 @@
-import React from "react";
+import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
+  const { googleLogin, setUser } = useAuth();
+
+  const handleGoogleLogin = () => {
+    googleLogin().then((res) => setUser(res.user));
+  };
   return (
     <div className="my-6 space-y-4">
       <button
+        onClick={handleGoogleLogin}
         aria-label="Login with Google"
         type="button"
         className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 dark:border-gray-600 focus:ring-violet-400 focus:dark:ring-violet-600"

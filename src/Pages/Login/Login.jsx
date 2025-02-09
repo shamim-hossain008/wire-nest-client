@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log("Form log in page:", email, password);
+  };
   return (
     <div className="w-full m-4 max-w-md mx-auto p-4 rounded-md shadow sm:p-8 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
       <h2 className="mb-3 text-3xl font-semibold text-center">
@@ -26,7 +33,12 @@ const Login = () => {
         <p className="px-3 text-gray-400 dark:text-gray-600">OR</p>
         <hr className="w-full text-gray-400 dark:text-gray-600" />
       </div>
-      <form noValidate="" action="" className="space-y-8">
+      <form
+        onSubmit={handleLogIn}
+        noValidate=""
+        action=""
+        className="space-y-8"
+      >
         <div className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm">
@@ -63,8 +75,8 @@ const Login = () => {
           </div>
         </div>
         <button
-          type="button"
-          className="w-full px-8 py-3 font-semibold rounded-md bg-violet-400 dark:bg-violet-600 text-gray-900 dark:text-gray-50"
+          type="submit"
+          className="w-full  px-8 py-3 font-semibold rounded-md bg-violet-400  dark:bg-violet-600 text-gray-900 dark:text-gray-50"
         >
           Sign in
         </button>

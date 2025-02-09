@@ -1,8 +1,18 @@
 import { IoLogoElectron } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
 import ThemeController from "../../../../../components/ThemeController /ThemeController";
+import useAuth from "../../../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  console.log("user nav:", user);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.error(error.message));
+  };
+
   const navInfo = (
     <>
       <li>
@@ -95,8 +105,9 @@ const Navbar = () => {
         <div className="dropdown dropdown-end ">
           <div
             tabIndex={0}
+            data-tip={user?.email}
             role="button"
-            className="btn btn-ghost btn-circle avatar"
+            className="btn btn-ghost  btn-circle avatar"
           >
             <div className="w-10 rounded-full">
               <img
@@ -111,18 +122,23 @@ const Navbar = () => {
           >
             <div className=" dropdown lg:hidden">{navInfo}</div>
             <li>
-              <a className="justify-between">
+              <Link to={"/profile"} className="justify-between">
                 Profile
-                <span className="badge">New</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a>Settings</a>
             </li>
             <li>
-              <Link to="/login" className="btn btn-primary">
-                Logout
-              </Link>
+              {user ? (
+                <button onClick={handleLogOut} className="btn btn-primary">
+                  Logout
+                </button>
+              ) : (
+                <Link to="/login" className="btn btn-primary">
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>
