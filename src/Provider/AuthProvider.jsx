@@ -1,4 +1,5 @@
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
@@ -13,10 +14,13 @@ import app from "../Firebase/firebase.config";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
+// social Provider
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const googleProvider = new GoogleAuthProvider();
 
   // for new user
   const createUser = (email, password) => {
@@ -36,23 +40,29 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  // login with github
+  const githubLogin = () => {
+    return signInWithPopup(auth, githubProvider);
+  };
+
   //   log Out user
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
 
+  // Observer
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (CurrentUser) => {
-      if (CurrentUser) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        // ...
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
       } else {
-        // User is signed out
-        // ...
+        setUser(null);
       }
     });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const authInfo = {
@@ -64,6 +74,7 @@ const AuthProvider = ({ children }) => {
     user,
     setUser,
     googleLogin,
+    githubLogin,
   };
 
   return (

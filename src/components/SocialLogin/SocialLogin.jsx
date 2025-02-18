@@ -1,10 +1,26 @@
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
-  const { googleLogin, setUser } = useAuth();
+  const { googleLogin, setUser, githubLogin } = useAuth();
+  const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
-    googleLogin().then((res) => setUser(res.user));
+    googleLogin().then((res) => {
+      toast.success("Successfully login");
+      setUser(res.user);
+    });
+    navigate("/");
+  };
+
+  const handleGithubLoin = () => {
+    githubLogin().then((res) => {
+      toast.success("Successfully Login");
+      setUser(res.user);
+    });
+
+    navigate("/");
   };
   return (
     <div className="my-6 space-y-4">
@@ -26,6 +42,7 @@ const SocialLogin = () => {
       <button
         aria-label="Login with GitHub"
         role="button"
+        onClick={handleGithubLoin}
         className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 dark:border-gray-600 focus:ring-violet-400 focus:dark:ring-violet-600"
       >
         <svg

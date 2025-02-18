@@ -5,21 +5,24 @@ const Profile = () => {
   return (
     <div className="flex flex-col justify-center mx-auto items-center w-1/2 p-6 mt-6 shadow-md rounded-xl bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
       <img
-        src="https://source.unsplash.com/150x150/?portrait?3"
+        src={user?.photoURL}
         alt=""
-        className="w-32 h-32 mx-auto rounded-full bg-gray-500 dark:bg-gray-500 aspect-square"
+        className="w-32 h-32 mx-auto rounded-full aspect-square"
       />
       <div className="space-y-4 text-center divide-y divide-gray-700 dark:divide-gray-300">
         <div className="my-2 space-y-1">
-          <h2 className="text-xl font-semibold sm:text-2xl">Leroy Jenkins</h2>
+          <h2 className="text-xl font-semibold sm:text-2xl">
+            {user?.displayName}
+          </h2>
           <p className="px-5 text-xs sm:text-base text-gray-400 dark:text-gray-600">
             Full-stack developer
           </p>
         </div>
+
         <div className="flex justify-center pt-2 space-x-4 align-center">
           <a
             rel="noopener noreferrer"
-            href="#"
+            href="https://github.com/shamim-hossain008"
             aria-label="GitHub"
             className="p-2 rounded-md text-gray-100 dark:text-gray-800 hover:text-violet-400 hover:dark:text-violet-600"
           >

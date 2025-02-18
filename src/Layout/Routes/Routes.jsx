@@ -3,6 +3,7 @@ import AddProductPage from "../../Pages/AddProduct/AddProductPage";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Register from "../../Pages/Register/Register";
+import ViewCart from "../../components/MyCart/ViewCart";
 import Profile from "../../components/UserProfile/Profile";
 import MainLayout from "../MainLayout";
 
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
         path: "/addProduct",
         element: <AddProductPage />,
       },
+      { path: "/viewCart", element: <ViewCart /> },
       {
         path: "/profile",
         element: <Profile />,
