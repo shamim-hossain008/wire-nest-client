@@ -25,7 +25,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
-      },
+      },{
+        path:'/updateProduct/id',
+        
+      }
     ],
   },
   { path: "/login", element: <Login /> },

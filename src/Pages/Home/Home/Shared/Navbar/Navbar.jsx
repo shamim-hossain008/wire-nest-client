@@ -19,6 +19,9 @@ const Navbar = () => {
       .catch((error) => toast.error(error.message));
     setUserOpen(false);
   };
+// fetch data for Cart item
+
+
 
   const navInfo = (
     <>
