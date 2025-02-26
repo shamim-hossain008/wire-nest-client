@@ -5,16 +5,9 @@ import ProductCard from "./ProductCard";
 
 function ViewCart() {
   const { user } = useAuth();
-  const [items, setItems] = useState([]);
-  const [control, setControl] = useState(false);
+ 
 
-  useEffect(() => {
-    fetch(`http://localhost:5070/myProduct/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
-      });
-  }, [user, control]);
+  
 
   return (
     <div className="flex flex-col max-w-3xl mx-auto p-6 space-y-4 sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">

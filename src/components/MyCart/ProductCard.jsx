@@ -1,7 +1,9 @@
 import React from "react";
 import { toast } from "react-hot-toast";
+import { useCart } from "../../Provider/CartProvider/CartProvider";
 
-const ProductCard = ({ item, control, setControl }) => {
+const ProductCard = ({ item }) => {
+  const { cartItems, setCartItems } = useCart();
   const { brandName, category, imageUrl, name, price, rating, _id } = item;
 
   const handleDelete = (_id) => {
@@ -13,7 +15,8 @@ const ProductCard = ({ item, control, setControl }) => {
       .then((data) => {
         // console.log("Delete response", data);
         if (data.deletedCount > 0) {
-          setControl(!control);
+          // Remove the deleted item form the cart
+          setCartItems(cartItems.filter((cartItem) => cartItem._id !== _id));
           toast.success("Deleted successfully!");
         } else {
           toast.error("Error deleting");

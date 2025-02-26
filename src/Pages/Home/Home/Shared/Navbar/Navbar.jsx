@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaRegUser } from "react-icons/fa6";
 import { IoLogoElectron } from "react-icons/io5";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useCart } from "../../../../../Provider/CartProvider/CartProvider";
 import ThemeController from "../../../../../components/ThemeController /ThemeController";
 import useAuth from "../../../../../hooks/useAuth";
 
@@ -11,6 +12,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [userOpen, setUserOpen] = useState(false);
   const [items, setItems] = useState([]);
+  // get cart item from context
+  const { cartItems } = useCart();
 
   const handleLogOut = () => {
     logOut()
@@ -20,7 +23,6 @@ const Navbar = () => {
       .catch((error) => toast.error(error.message));
     setUserOpen(false);
   };
-  
 
   const navInfo = (
     <>
@@ -97,9 +99,11 @@ const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm rounded-full  indicator-item bg-red-500">
-                {items.length}
-              </span>
+              {cartItems.length > 0 && (
+                <span className="badge badge-sm rounded-full  indicator-item bg-red-500">
+                  {cartItems.length}
+                </span>
+              )}
             </div>
           </div>
           <div
