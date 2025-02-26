@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaRegUser } from "react-icons/fa6";
 import { IoLogoElectron } from "react-icons/io5";
@@ -10,6 +10,7 @@ const Navbar = () => {
   const { user, logOut } = useAuth() || {};
   const navigate = useNavigate();
   const [userOpen, setUserOpen] = useState(false);
+  const [items, setItems] = useState([]);
 
   const handleLogOut = () => {
     logOut()
@@ -19,9 +20,7 @@ const Navbar = () => {
       .catch((error) => toast.error(error.message));
     setUserOpen(false);
   };
-// fetch data for Cart item
-
-
+  
 
   const navInfo = (
     <>
@@ -83,7 +82,7 @@ const Navbar = () => {
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <div className="indicator">
+            <div className="indicator p-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -98,8 +97,8 @@ const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                 />
               </svg>
-              <span className="badge badge-sm rounded-full indicator-item bg-red-500">
-                8
+              <span className="badge badge-sm rounded-full  indicator-item bg-red-500">
+                {items.length}
               </span>
             </div>
           </div>

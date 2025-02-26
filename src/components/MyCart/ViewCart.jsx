@@ -5,23 +5,35 @@ import ProductCard from "./ProductCard";
 
 function ViewCart() {
   const { user } = useAuth();
-  const [item, setItem] = useState([]);
+  const [items, setItems] = useState([]);
+  const [control, setControl] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:5070/myProduct/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        setItem(data);
+        setItems(data);
       });
-  }, [user]);
+  }, [user, control]);
+
   return (
     <div className="flex flex-col max-w-3xl mx-auto p-6 space-y-4 sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
-      <h2 className="text-2xl text-center text-blue-600 font-bold shadow-sm p-2">
-        Your Cart
-      </h2>
-      {item?.map((item) => (
-        <ProductCard key={item._id} item={item} />
-      ))}
+      <div className="flex justify-between text-2xl text-center text-blue-600 font-bold shadow-sm p-2">
+        <h2>Your Cart</h2>
+        <h2>Total Items: {items.length}</h2>
+      </div>
+      {items.length > 0 ? (
+        items.map((item) => (
+          <ProductCard
+            key={item._id}
+            item={item}
+            control={control}
+            setControl={setControl}
+          />
+        ))
+      ) : (
+        <p className="text-center">Your cart is empty.</p>
+      )}
       <div className="space-y-1 text-right">
         <p>
           Total amount:

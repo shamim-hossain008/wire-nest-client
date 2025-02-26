@@ -1,7 +1,27 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 
-const ProductCard = ({ item }) => {
-  const { brandName, category, imageUrl, name, price, rating } = item;
+const ProductCard = ({ item, control, setControl }) => {
+  const { brandName, category, imageUrl, name, price, rating, _id } = item;
+
+  const handleDelete = (_id) => {
+    fetch(`http://localhost:5070/delete-cart/${_id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log("Delete response", data);
+        if (data.deletedCount > 0) {
+          setControl(!control);
+          toast.success("Deleted successfully!");
+        } else {
+          toast.error("Error deleting");
+        }
+      })
+      .catch((error) => console.error("Error deleting item:", error));
+  };
+
   return (
     <div>
       <ul className="flex flex-col divide-y divide-gray-700 dark:divide-gray-300">
@@ -28,6 +48,7 @@ const ProductCard = ({ item }) => {
               </div>
               <div className="flex text-sm divide-x">
                 <button
+                  onClick={() => handleDelete(_id)}
                   type="button"
                   className="flex items-center hover:text-red-600 px-2 py-1 pl-0 space-x-1"
                 >
