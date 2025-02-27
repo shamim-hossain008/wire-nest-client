@@ -6,6 +6,7 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
   const [cartItems, setCartItems] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   //   Fetch cart items when the user is logged in
   useEffect(() => {
@@ -19,12 +20,17 @@ export const CartProvider = ({ children }) => {
   }, [user]);
   //  Calculate total amount whenever cart updated
   useEffect(() => {
-    const total = cartItems.reduce((sum, item) => sum + item.price, 0);
-  }, []);
+    const total = cartItems.reduce(
+      (sum, item) => sum + Number(item.price || 0),
+      0
+    );
+    setTotalAmount(total || 0);
+  }, [cartItems]);
 
   const cartInfo = {
     cartItems,
     setCartItems,
+    totalAmount,
   };
   return (
     <CartContext.Provider value={cartInfo}>{children}</CartContext.Provider>

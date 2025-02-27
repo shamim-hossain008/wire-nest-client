@@ -1,10 +1,10 @@
 import { toast } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const AddProductPage = () => {
   const { user } = useAuth() || {};
-
-  console.log("login user:", user);
+  const navigate = useNavigate();
 
   const handleAddProduct = (e) => {
     e.preventDefault();
@@ -38,6 +38,7 @@ const AddProductPage = () => {
         if (data?.insertedId) {
           toast.success("Product has been added successfully!");
         }
+        navigate("/");
       });
   };
   return (

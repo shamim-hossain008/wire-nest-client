@@ -4,7 +4,7 @@ import { useCart } from "../../Provider/CartProvider/CartProvider";
 
 const ProductCard = ({ item }) => {
   const { cartItems, setCartItems } = useCart();
-  const { brandName, category, imageUrl, name, price, rating, _id } = item;
+  const { brandName, category, imageUrl, price, _id } = item;
 
   const handleDelete = (_id) => {
     fetch(`http://localhost:5070/delete-cart/${_id}`, {

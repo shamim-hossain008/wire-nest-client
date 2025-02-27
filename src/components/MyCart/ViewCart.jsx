@@ -1,36 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import { useCart } from "../../Provider/CartProvider/CartProvider";
 import ProductCard from "./ProductCard";
 
 function ViewCart() {
-  const { user } = useAuth();
- 
-
-  
+  const { cartItems, totalAmount } = useCart();
 
   return (
     <div className="flex flex-col max-w-3xl mx-auto p-6 space-y-4 sm:p-10 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800">
       <div className="flex justify-between text-2xl text-center text-blue-600 font-bold shadow-sm p-2">
         <h2>Your Cart</h2>
-        <h2>Total Items: {items.length}</h2>
+        <h2>Total Items: {cartItems.length}</h2>
       </div>
-      {items.length > 0 ? (
-        items.map((item) => (
-          <ProductCard
-            key={item._id}
-            item={item}
-            control={control}
-            setControl={setControl}
-          />
-        ))
+      {cartItems.length > 0 ? (
+        cartItems.map((item) => <ProductCard key={item._id} item={item} />)
       ) : (
         <p className="text-center">Your cart is empty.</p>
       )}
       <div className="space-y-1 text-right">
         <p>
           Total amount:
-          <span className="font-semibold">RM</span>
+          <span className="font-semibold">
+            RM {Number(totalAmount).toFixed(2)}
+          </span>
         </p>
         <p className="text-sm text-gray-400 dark:text-gray-600">
           Not including taxes and shipping costs
